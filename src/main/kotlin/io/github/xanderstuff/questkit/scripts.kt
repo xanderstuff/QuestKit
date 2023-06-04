@@ -23,11 +23,14 @@ class Script(
     }
 }
 
+/**
+ * Reloads all scripts in the folder.
+ */
 fun reloadAllScripts() {
     val scriptEngineManager = ScriptEngineManager()
     val kotlinEngine = scriptEngineManager.getEngineByExtension("kts")
 
-    val directory = File("path/to/directory")
+    val directory = File(SCRIPT_PATH)
     directory.walkTopDown().forEach { if (it.isFile && it.extension == "kts") {
         Script(it).load(kotlinEngine)
     } }
