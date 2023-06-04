@@ -14,12 +14,12 @@ class Script(
         } catch (e: ScriptException) {
             error(
                 """
-                An error has occured in a script!
-                At: ${e.fileName} ${e.lineNumber}:${e.columnNumber}
+                An error has occurred in a script!
+                At: ${e.fileName}, line: ${e.lineNumber} column:${e.columnNumber}
                 Stack Trace:
                 
                 ${e.stackTraceToString()}
-            """.trimIndent()
+                """.trimIndent()
             )
         }
     }
