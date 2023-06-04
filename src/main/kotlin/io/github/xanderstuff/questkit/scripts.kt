@@ -12,13 +12,15 @@ class Script(
         try {
             engine.eval(file.reader())
         } catch (e: ScriptException) {
-            error("""
+            error(
+                """
                 An error has occured in a script!
                 At: ${e.fileName} ${e.lineNumber}:${e.columnNumber}
                 Stack Trace:
                 
                 ${e.stackTraceToString()}
-            """.trimIndent())
+            """.trimIndent()
+            )
         }
     }
 }
@@ -31,7 +33,9 @@ fun reloadAllScripts() {
     val kotlinEngine = scriptEngineManager.getEngineByExtension("kts")
 
     val directory = File(SCRIPT_PATH)
-    directory.walkTopDown().forEach { if (it.isFile && it.extension == "kts") {
-        Script(it).load(kotlinEngine)
-    } }
+    directory.walkTopDown().forEach {
+        if (it.isFile && it.extension == "kts") {
+            Script(it).load(kotlinEngine)
+        }
+    }
 }
