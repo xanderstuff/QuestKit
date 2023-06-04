@@ -13,11 +13,12 @@ class QuestKitPlugin : JavaPlugin() {
         // ensure config file exists
         saveDefaultConfig()
 
-        logger.info("${description.name} version ${description.version} enabled!")
+        @Suppress("DEPRECATION")
+        log("${this.name} version ${description.version} enabled!")
         reloadAllScripts()
     }
 
     override fun onDisable() {
-        logger.info("${description.name} disabled.")
+        log("${this.name} disabled.")
     }
 }

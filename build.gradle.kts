@@ -70,12 +70,15 @@ repositories {
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://mvn.lumine.io/repository/maven-public/")
+    maven("https://repo.codemc.org/repository/maven-public/")
 }
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
     compileOnly("io.lumine:Mythic-Dist:5.3.0-SNAPSHOT")
+    compileOnly("dev.jorel:commandapi-bukkit-core:9.0.1")
+
 }
 
 tasks {
