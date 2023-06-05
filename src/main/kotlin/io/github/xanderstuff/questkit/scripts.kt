@@ -40,7 +40,8 @@ class Script(
 fun reloadAllScripts(): Pair<Int, Int> {
     val kotlinEngine = ScriptEngineManager().getEngineByExtension("kts")!!
 
-    val directory = File(SCRIPT_PATH)
+    val directory = QuestKitPlugin.instance.dataFolder.resolve(SCRIPT_PATH)
+    //FIXME: currently, the scripts folder is not created if it's not found
 
     var numScriptsLoaded = 0
     var numScriptsAvailable = 0
