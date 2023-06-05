@@ -8,7 +8,12 @@ import javax.script.ScriptException
 class Script(
     val file: File
 ) {
-    fun load(engine: ScriptEngine) {
+    /**
+     * Loads this [Script] using the provided [engine]
+     *
+     * @return true if the script was loaded successfully
+     */
+    fun load(engine: ScriptEngine): Boolean {
         try {
             engine.eval(file.reader())
         } catch (e: ScriptException) {
@@ -21,21 +26,31 @@ class Script(
                 ${e.stackTraceToString()}
                 """.trimIndent()
             )
+            return false
         }
+        return true
     }
 }
 
 /**
  * Reloads all scripts in the folder.
+ *
+ * @return a [Pair] of Ints, corresponding to the number of successfully loaded scripts and the number of scripts that were attempted to load, respectively
  */
-fun reloadAllScripts() {
-    val scriptEngineManager = ScriptEngineManager()
-    val kotlinEngine = scriptEngineManager.getEngineByExtension("kts")
+fun reloadAllScripts(): Pair<Int, Int> {
+    val kotlinEngine = ScriptEngineManager().getEngineByExtension("kts")!!
 
     val directory = File(SCRIPT_PATH)
+
+    var numScriptsLoaded = 0
+    var numScriptsAvailable = 0
     directory.walkTopDown().forEach {
         if (it.isFile && it.extension == "kts") {
-            Script(it).load(kotlinEngine)
+            numScriptsAvailable++
+            if (Script(it).load(kotlinEngine)) numScriptsLoaded++
         }
     }
+
+    log("Finished loading $numScriptsLoaded out of $numScriptsAvailable scripts")
+    return Pair(numScriptsLoaded, numScriptsAvailable)
 }
