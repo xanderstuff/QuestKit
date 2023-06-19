@@ -1,4 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
 import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.Yaml
 import java.time.OffsetDateTime
@@ -124,13 +123,7 @@ tasks {
         rename("offline-plugin.yml", "plugin.yml")
     }
 
-    // avoid classpath conflicts/pollution via relocation
-    val configureShadowRelocation by registering(ConfigureShadowRelocation::class) {
-        target = shadowJar.get()
-        prefix = "${project.group}.${project.name.lowercase()}.libraries"
-    }
-
     build {
-        dependsOn(shadowJar).dependsOn(configureShadowRelocation)
+        dependsOn(shadowJar)
     }
 }
