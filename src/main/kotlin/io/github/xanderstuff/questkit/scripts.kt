@@ -19,12 +19,12 @@ class Script(
         } catch (e: ScriptException) {
             error(
                 """
-                An error has occurred in a script!
+                An error has occurred while loading a script!
+                Script file: ${file.name}
                 At: ${e.fileName}, line: ${e.lineNumber} column:${e.columnNumber}
                 Stack Trace:
                 
-                ${e.stackTraceToString()}
-                """.trimIndent()
+                """.trimIndent() + e.stackTraceToString()
             )
             return false
         }
