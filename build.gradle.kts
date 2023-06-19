@@ -18,7 +18,7 @@ plugins {
     kotlin("jvm")
     id("com.github.johnrengelman.shadow") version "8.0.0"
     id("pl.allegro.tech.build.axion-release") version "1.14.4"
-    id("org.jlleitschuh.gradle.ktlint") version "11.2.0"
+    // id("org.jlleitschuh.gradle.ktlint") version "11.2.0"
 }
 
 group = "io.github.xanderstuff"
