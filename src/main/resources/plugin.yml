@@ -6,5 +6,5 @@ website: https://github.com/xanderstuff/QuestKit
 authors:
   - xanderstuff
   - 0TickPulse
-libraries:
-  - org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}
+#libraries:
+#  - org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}

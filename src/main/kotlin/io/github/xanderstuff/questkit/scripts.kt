@@ -2,7 +2,6 @@ package io.github.xanderstuff.questkit
 
 import java.io.File
 import javax.script.ScriptEngine
-import javax.script.ScriptEngineManager
 import javax.script.ScriptException
 
 class Script(
@@ -38,7 +37,7 @@ class Script(
  * @return a [Pair] of Ints, corresponding to the number of successfully loaded scripts and the number of scripts that were attempted to load, respectively
  */
 fun reloadAllScripts(): Pair<Int, Int> {
-    val kotlinEngine = ScriptEngineManager().getEngineByExtension("kts")!!
+    val kotlinEngine = KotlinScriptEngineFactory().scriptEngine
 
     val directory = QuestKitPlugin.instance.dataFolder.resolve(SCRIPT_PATH)
     //FIXME: currently, the scripts folder is not created if it's not found

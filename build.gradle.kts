@@ -15,7 +15,7 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm")
+    kotlin("jvm") version "1.8.21"
     id("com.github.johnrengelman.shadow") version "8.0.0"
     id("pl.allegro.tech.build.axion-release") version "1.14.4"
     // id("org.jlleitschuh.gradle.ktlint") version "11.2.0"
@@ -77,6 +77,20 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
     compileOnly("io.lumine:Mythic-Dist:5.3.0-SNAPSHOT")
     implementation("dev.jorel:commandapi-bukkit-shade:9.0.1")
+
+    // We'll probably need stdlib
+//    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21")
+//    implementation("org.jetbrains.kotlin:kotlin-stdlib-common:1.8.21")
+
+    implementation("org.jetbrains.kotlin:kotlin-scripting-jsr223:1.8.21")
+    implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.8.21")
+    implementation("org.jetbrains.kotlin:kotlin-script-util:1.8.21")
+    implementation("org.jetbrains.kotlin:kotlin-script-runtime:1.8.21")
+
+    // for @file:@DependsOn, @file:@Repository in scripts
+//    implementation("org.jetbrains.kotlin:kotlin-scripting-dependencies:1.8.21")
+    // for @file:@DependsOn, @file:@Repository, @file:@Import in scripts
+    implementation("org.jetbrains.kotlin:kotlin-main-kts:1.8.21")
 }
 
 tasks {
@@ -117,7 +131,9 @@ tasks {
 
     // offline jar should be ready to go with all dependencies
     shadowJar {
-        minimize()
+        //TODO: figure out if minimize() can safely be used, even partially
+        // (probably need to exclude std-lib, ect. so scripts can still use those dependencies)
+//        minimize()
         archiveClassifier.set("offline")
         exclude("plugin.yml")
         rename("offline-plugin.yml", "plugin.yml")
